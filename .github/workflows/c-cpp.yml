@@ -14,6 +14,6 @@ jobs:
     - name: docker pull
       run: docker pull ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic
     - name: docker rm
-      run: docker run -d --name linux_docker --rm -ti vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic bash
+      run: docker run -d --name linux_docker --rm -ti ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic bash
     - name: docker stop
       run: docker stop linux_docker
