@@ -1,0 +1,19 @@
+name: C/C++ CI
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: pwd
+      run: pwd
+    - name: docker pull
+      run: docker pull ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic
+    - name: docker rm
+      run: docker run -d --name linux_docker --rm -ti vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic bash
+    - name: docker stop
+      run: docker stop linux_docker
