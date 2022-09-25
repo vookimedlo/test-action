@@ -11,9 +11,16 @@ jobs:
     - uses: actions/checkout@v3
     - name: pwd
       run: pwd
-    - name: docker pull
+    - name: docker [pull a build image]
       run: docker pull ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic
-    - name: docker rm
+    - name: docker [run a container]
       run: docker run -d --name linux_docker --rm -ti ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic bash
+    - name: docker [copy sources]
+      run: |
+        docker exec linux_docker mkdir -p /root/sources/vooki-image-viewer
+        docker cp -L ./ linux_docker:/root/sources/vooki-image-viewer
+    - name: docker [build sources]
+      run: |
+        docker exec linux_docker ls -l /root/sources/vooki-image-viewer
     - name: docker stop
       run: docker stop linux_docker
