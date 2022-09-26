@@ -24,11 +24,12 @@ jobs:
         docker exec linux_docker bash -c 'source /etc/profile && cd /root/sources/ && cmake -DCMAKE_BUILD_TYPE=Release -H. -Bbuild vooki-image-viewer/build/cmake && cmake --build build --config Release --target package'
     - name: docker [collect artifacts]
       run: |
-        docker exec linux_docker /bin/sh -c 'cd root/sources/build/ && tar -cf - *.deb' | tar -xvf -
+        docker exec linux_docker /bin/sh -c 'cd /root/sources/build/ && tar -cf - *.deb' | tar -xvf -
+        echo "artifact_name=`ls *.deb`" >> $GITHUB_ENV
     - name: archive artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: deb-package_kinetic
+        name: ubuntu_kinetic_${{ env.artifact_name }}
         path: |
           *.deb
         retention-days: 5
