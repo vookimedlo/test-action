@@ -31,5 +31,6 @@ jobs:
         name: deb-package_kinetic
         path: |
           *.deb
+        retention-days: 5
     - name: docker [stop]
       run: docker stop linux_docker || true
