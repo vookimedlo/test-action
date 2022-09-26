@@ -3,41 +3,32 @@ name: Linux Builds
 on: workflow_dispatch
 
 jobs:
-  ubuntu_kinetic:
+  ubuntu:
     strategy:
       matrix:
         compiler: [gcc, clang]
+        distribution: [jammy, kinetic]
     uses: ./.github/workflows/reusable_linux_build.yml
     with:
-      docker_image: ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_${{ matrix.compiler }}_kinetic
-      artifact_name: deb-package_ubuntu_kinetic_${{ matrix.compiler }}
-  ubuntu_jammy:
+      docker_image: ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_${{ matrix.compiler }}_${{ matrix.distribution }}
+      artifact_name: deb-package_ubuntu_${{ matrix.distribution }}_${{ matrix.compiler }}
+  
+  debian:
+    strategy:
+      matrix:
+        compiler: [gcc, clang]
+        distribution: [stable, bullseye, bookworm]
     uses: ./.github/workflows/reusable_linux_build.yml
     with:
-      docker_image: ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_jammy
-      artifact_name: deb-package_ubuntu_jammy
-  debian_stable:
+      docker_image: ghcr.io/vookimedlo/debian-qt:qt6_latestdistroofficial_${{ matrix.compiler }}_${{ matrix.distribution }}
+      artifact_name: deb-package_debian_${{ matrix.distribution }}_${{ matrix.compiler }}
+
+  fedora:
+    strategy:
+      matrix:
+        compiler: [gcc, clang]
+        distribution: [stable, 36]
     uses: ./.github/workflows/reusable_linux_build.yml
     with:
-      docker_image: ghcr.io/vookimedlo/debian-qt:qt6_latestdistroofficial_gcc_stable
-      artifact_name: deb-package_debian_stable
-  debian_bullseye:
-    uses: ./.github/workflows/reusable_linux_build.yml
-    with:
-      docker_image: ghcr.io/vookimedlo/debian-qt:qt6_latestdistroofficial_gcc_bullseye
-      artifact_name: deb-package_debian_bullseye
-  debian_bookworm:
-    uses: ./.github/workflows/reusable_linux_build.yml
-    with:
-      docker_image: ghcr.io/vookimedlo/debian-qt:qt6_latestdistroofficial_gcc_bookworm
-      artifact_name: deb-package_debian_bookworm
-  fedora_stable:
-    uses: ./.github/workflows/reusable_linux_build.yml
-    with:
-      docker_image: ghcr.io/vookimedlo/fedora-qt:qt6_latestDistroOfficial_gcc_stable
-      artifact_name: rpm-package_fedora_stable
-  fedora_36:
-    uses: ./.github/workflows/reusable_linux_build.yml
-    with:
-      docker_image: ghcr.io/vookimedlo/fedora-qt:qt6_latestDistroOfficial_gcc_36
-      artifact_name: rpm-package_fedora_36
+      docker_image: ghcr.io/vookimedlo/fedora-qt:qt6_latestdistroofficial_${{ matrix.compiler }}_${{ matrix.distribution }}
+      artifact_name: rpm-package_fedora_${{ matrix.distribution }}_${{ matrix.compiler }}
