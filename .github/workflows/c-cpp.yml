@@ -12,11 +12,11 @@ jobs:
       run: pwd
     - name: build sources
       run: |
-        cd /root/sources/
         cmake -DCMAKE_BUILD_TYPE=Release -H. -Bbuild vooki-image-viewer/build/cmake
         cd build
         make -j install
         ls -l
+        cd ..
  #   - name: docker [collect artifacts]
  #     run: |
  #       docker exec macos_docker /bin/sh -c 'cd /root/sources/build/ && tar -cf - *.deb' | tar -xvf -
