@@ -4,7 +4,12 @@ on: workflow_dispatch
 
 jobs:
   ubuntu_kinetic:
-    uses: ./.github/workflows/linux_package_build.yml
+    uses: ./.github/workflows/reusable_linux_build.yml
     with:
       docker_image: ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic
       artifact_name: deb-package_kinetic
+  ubuntu_jammy:
+    uses: ./.github/workflows/reusable_linux_build.yml
+    with:
+      docker_image: ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic
+      artifact_name: deb-package_jammy
