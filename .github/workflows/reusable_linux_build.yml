@@ -39,7 +39,7 @@ jobs:
     - name: docker [collect artifacts]
       run: |
         docker exec linux_docker /bin/sh -c 'cd /root/sources/build/ && tar -cf - *.deb *.rpm' | tar -xvf -
-        echo "artifact_name=`ls *.deb`" >> $GITHUB_ENV
+        echo "artifact_name=`ls *.deb *.rpm`" >> $GITHUB_ENV
     - name: archive artifacts
       uses: actions/upload-artifact@v3
       with:
