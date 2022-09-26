@@ -1,10 +1,9 @@
-name: C/C++ CI
+name: Ubuntu Kinetic
 
 on: workflow_dispatch
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -23,14 +22,14 @@ jobs:
       run: |
         docker exec linux_docker ls -la /root/sources/vooki-image-viewer
         docker exec linux_docker bash -c 'source /etc/profile && cd /root/sources/ && cmake -DCMAKE_BUILD_TYPE=Release -H. -Bbuild vooki-image-viewer/build/cmake && cmake --build build --config Release --target package'
+    - name: docker [collect artifacts]
+      run: |
         docker exec linux_docker /bin/sh -c 'cd root/sources/build/ && tar -cf - *.deb' | tar -xvf -
- #   - name: docker [collect artifacts]
- #     run: docker exec linux_docker bash -c 'cd /root/sources/build/ && ls -l && tar -cf *.deb' | tar -xvf -
     - name: archive artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: kinetic-deb
+        name: deb-package_kinetic
         path: |
           *.deb
-    - name: docker stop
-      run: docker stop linux_docker
+    - name: docker [stop]
+      run: docker stop linux_docker || true
