@@ -4,14 +4,17 @@ on: workflow_dispatch
 
 jobs:
   ubuntu_kinetic:
+    strategy:
+      matrix:
+        compiler: [gcc, clang]
     uses: ./.github/workflows/reusable_linux_build.yml
     with:
-      docker_image: ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic
-      artifact_name: deb-package_ubuntu_kinetic
+      docker_image: ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_${{ matrix.compiler }}_kinetic
+      artifact_name: deb-package_ubuntu_kinetic_${{ matrix.compiler }}
   ubuntu_jammy:
     uses: ./.github/workflows/reusable_linux_build.yml
     with:
-      docker_image: ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic
+      docker_image: ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_jammy
       artifact_name: deb-package_ubuntu_jammy
   debian_stable:
     uses: ./.github/workflows/reusable_linux_build.yml
@@ -32,9 +35,9 @@ jobs:
     uses: ./.github/workflows/reusable_linux_build.yml
     with:
       docker_image: ghcr.io/vookimedlo/fedora-qt:qt6_latestDistroOfficial_gcc_stable
-      artifact_name: deb-package_fedora_stable
+      artifact_name: rpm-package_fedora_stable
   fedora_36:
     uses: ./.github/workflows/reusable_linux_build.yml
     with:
       docker_image: ghcr.io/vookimedlo/fedora-qt:qt6_latestDistroOfficial_gcc_36
-      artifact_name: deb-package_fedora_36
+      artifact_name: rpm-package_fedora_36
