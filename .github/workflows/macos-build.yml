@@ -27,15 +27,3 @@ jobs:
         make -j install
         ls -l
         cd ..
- #   - name: docker [collect artifacts]
- #     run: |
- #       docker exec macos_docker /bin/sh -c 'cd /root/sources/build/ && tar -cf - *.deb' | tar -xvf -
- #       echo "artifact_name=`ls *.deb`" >> $GITHUB_ENV
-  #  - name: archive artifacts
-  #    uses: actions/upload-artifact@v3
-  #    with:
-  #      name: ubuntu_kinetic_${{ env.artifact_name }}
-  #      path: |
-  #        *.deb
-  #      retention-days: 5
-
