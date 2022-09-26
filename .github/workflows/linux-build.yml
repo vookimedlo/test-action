@@ -5,6 +5,7 @@ on: workflow_dispatch
 jobs:
   ubuntu:
     strategy:
+      fail-fast: true
       matrix:
         compiler: [gcc, clang]
         distribution: [jammy, kinetic]
@@ -15,6 +16,7 @@ jobs:
   
   debian:
     strategy:
+      fail-fast: true
       matrix:
         compiler: [gcc, clang]
         distribution: [stable, bullseye, bookworm]
@@ -25,6 +27,7 @@ jobs:
 
   fedora:
     strategy:
+      fail-fast: true
       matrix:
         compiler: [gcc, clang]
         distribution: [stable, 36]
