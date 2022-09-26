@@ -46,6 +46,6 @@ jobs:
         path: |
           *.deb
           *.rpm
-        retention-days: 5
+        retention-days: ${{ inputs.artifact_retention_days }}
     - name: docker [stop]
       run: docker stop linux_docker || true
