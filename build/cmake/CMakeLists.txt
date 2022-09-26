@@ -18,7 +18,7 @@
 
 PROJECT(vookiimageviewer HOMEPAGE_URL "https://vookiimageviewer.cz")
 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.22)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.18.4)
 
 SET(APPLICATION_NAME VookiImageViewer)
 MESSAGE("-- ${APPLICATION_NAME} - https://vookiimageviewer.cz")
