@@ -7,9 +7,34 @@ jobs:
     uses: ./.github/workflows/reusable_linux_build.yml
     with:
       docker_image: ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic
-      artifact_name: deb-package_kinetic
+      artifact_name: deb-package_ubuntu_kinetic
   ubuntu_jammy:
     uses: ./.github/workflows/reusable_linux_build.yml
     with:
       docker_image: ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic
-      artifact_name: deb-package_jammy
+      artifact_name: deb-package_ubuntu_jammy
+  debian_stable:
+    uses: ./.github/workflows/reusable_linux_build.yml
+    with:
+      docker_image: ghcr.io/vookimedlo/debian-qt:qt6_latestdistroofficial_gcc_stable
+      artifact_name: deb-package_debian_stable
+  debian_bullseye:
+    uses: ./.github/workflows/reusable_linux_build.yml
+    with:
+      docker_image: ghcr.io/vookimedlo/debian-qt:qt6_latestdistroofficial_gcc_bullseye
+      artifact_name: deb-package_debian_bullseye
+  debian_bookworm:
+    uses: ./.github/workflows/reusable_linux_build.yml
+    with:
+      docker_image: ghcr.io/vookimedlo/debian-qt:qt6_latestdistroofficial_gcc_bookworm
+      artifact_name: deb-package_debian_bookworm
+  fedora_stable:
+    uses: ./.github/workflows/reusable_linux_build.yml
+    with:
+      docker_image: ghcr.io/vookimedlo/fedora-qt:qt6_latestDistroOfficial_gcc_stable
+      artifact_name: deb-package_fedora_stable
+  fedora_36:
+    uses: ./.github/workflows/reusable_linux_build.yml
+    with:
+      docker_image: ghcr.io/vookimedlo/fedora-qt:qt6_latestDistroOfficial_gcc_36
+      artifact_name: deb-package_fedora_36
