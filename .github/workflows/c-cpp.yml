@@ -12,7 +12,9 @@ jobs:
       run: pwd
     - name: build sources
       run: |
-        cmake -DCMAKE_BUILD_TYPE=Release -H. -Bbuild vooki-image-viewer/build/cmake
+        WORKDIR=`pwd`
+        cd ..
+        cmake -DCMAKE_BUILD_TYPE=Release -H. -Bbuild $WORKDIR/build/cmake
         cd build
         make -j install
         ls -l
