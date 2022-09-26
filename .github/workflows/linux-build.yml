@@ -1,4 +1,4 @@
-name: Ubuntu Kinetic [new]
+name: Linux Builds
 
 on: workflow_dispatch
 
