@@ -12,7 +12,7 @@ jobs:
     uses: ./.github/workflows/reusable_linux_build.yml
     with:
       docker_image: ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_${{ matrix.compiler }}_${{ matrix.distribution }}
-      artifact_name: deb-package_ubuntu_${{ matrix.distribution }}_${{ matrix.compiler }}
+      artifact_name: ubuntu_${{ matrix.distribution }}_${{ matrix.compiler }}
   
   debian:
     strategy:
@@ -23,7 +23,7 @@ jobs:
     uses: ./.github/workflows/reusable_linux_build.yml
     with:
       docker_image: ghcr.io/vookimedlo/debian-qt:qt6_latestdistroofficial_${{ matrix.compiler }}_${{ matrix.distribution }}
-      artifact_name: deb-package_debian_${{ matrix.distribution }}_${{ matrix.compiler }}
+      artifact_name: debian_${{ matrix.distribution }}_${{ matrix.compiler }}
 
   fedora:
     strategy:
@@ -34,4 +34,4 @@ jobs:
     uses: ./.github/workflows/reusable_linux_build.yml
     with:
       docker_image: ghcr.io/vookimedlo/fedora-qt:qt6_latestdistroofficial_${{ matrix.compiler }}_${{ matrix.distribution }}
-      artifact_name: rpm-package_fedora_${{ matrix.distribution }}_${{ matrix.compiler }}
+      artifact_name: fedora_${{ matrix.distribution }}_${{ matrix.compiler }}
