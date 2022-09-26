@@ -1,37 +1,31 @@
-name: Ubuntu Kinetic
+name: MacOS Builds
 
 on: workflow_dispatch
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-12
 
     steps:
     - uses: actions/checkout@v3
     - name: pwd
       run: pwd
-    - name: docker [pull a build image]
-      run: docker pull ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic
-    - name: docker [run a container]
-      run: docker run -d --name linux_docker --rm -ti ghcr.io/vookimedlo/ubuntu-qt:qt6_latestdistroofficial_gcc_kinetic bash
-    - name: docker [copy sources]
+    - name: build sources
       run: |
-        docker exec linux_docker mkdir -p /root/sources/vooki-image-viewer
-        docker cp -L ./ linux_docker:/root/sources/vooki-image-viewer
-    - name: docker [build sources]
-      run: |
-        docker exec linux_docker ls -la /root/sources/vooki-image-viewer
-        docker exec linux_docker bash -c 'source /etc/profile && cd /root/sources/ && cmake -DCMAKE_BUILD_TYPE=Release -H. -Bbuild vooki-image-viewer/build/cmake && cmake --build build --config Release --target package'
-    - name: docker [collect artifacts]
-      run: |
-        docker exec linux_docker /bin/sh -c 'cd /root/sources/build/ && tar -cf - *.deb' | tar -xvf -
-        echo "artifact_name=`ls *.deb`" >> $GITHUB_ENV
-    - name: archive artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: ubuntu_kinetic_${{ env.artifact_name }}
-        path: |
-          *.deb
-        retention-days: 5
-    - name: docker [stop]
-      run: docker stop linux_docker || true
+        cd /root/sources/
+        cmake -DCMAKE_BUILD_TYPE=Release -H. -Bbuild vooki-image-viewer/build/cmake
+        cd build
+        make -j install
+        ls -l
+ #   - name: docker [collect artifacts]
+ #     run: |
+ #       docker exec macos_docker /bin/sh -c 'cd /root/sources/build/ && tar -cf - *.deb' | tar -xvf -
+ #       echo "artifact_name=`ls *.deb`" >> $GITHUB_ENV
+  #  - name: archive artifacts
+  #    uses: actions/upload-artifact@v3
+  #    with:
+  #      name: ubuntu_kinetic_${{ env.artifact_name }}
+  #      path: |
+  #        *.deb
+  #      retention-days: 5
+
