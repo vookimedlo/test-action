@@ -1,6 +1,6 @@
-name: Compile and Release Qt6 Proyect
+name: Windows Builds
 
-on: push
+on: workflow_dispatch
 
 env:
   QT_VERSION:     "6.3.1"
