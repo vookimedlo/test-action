@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 env:
   QT_VERSION:     "6.3.2"
-  MINGW_VERSION:  "msvc2019_64"
+  MINGW_VERSION:  "win64_msvc2019_64"
   BUILD_TYPE:      Release
 
 jobs:
