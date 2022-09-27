@@ -67,9 +67,10 @@ jobs:
         cd build
         pwd
         echo "--"
-        bash -c "echo \"artifact_name=`ls *.zip`\"
+        bash -c "echo \"artifact_name=`ls *.zip`\""
         echo "--"
         bash -c "echo \"artifact_name=`ls *.zip`\" >> $GITHUB_ENV"
+        bash -c "echo \"artifact_name=`ls *.zip`\"" >> $env:GITHUB_ENV
     - name: test
       run: echo "${{env.artifact_name}}"
 
