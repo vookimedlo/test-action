@@ -54,13 +54,13 @@ jobs:
 #        mingw32-make.exe -version  
     -
       name: Configure CMake Proyect
-      working-directory: ${{github.workspace}}
+      working-directory: ${{github.workspace}}\..
       env:
         CMAKE_PREFIX_PATH: ${{env.Qt6_Dir}}
-      run: cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "CodeBlocks - MinGW Makefiles" -B ${{github.workspace}}/build builds/cmake
+      run: cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "CodeBlocks - MinGW Makefiles" -B ${{github.workspace}}\..\build ${{github.workspace}}\build/cmake
     -
       name: Build project
-      working-directory: ${{github.workspace}}/build
+      working-directory: ${{github.workspace}}\..\build
       run: |
         mingw32-make.exe
 #    -
