@@ -67,10 +67,8 @@ jobs:
         cd build
         pwd
         echo "artifact_name=`ls *.zip`" >> $GITHUB_ENV
-        echo "${{env.artifact_name}}"
-        refreshenv
-        echo "${{env.artifact_name}}"
-
+    - name: test
+      run: echo "${{env.artifact_name}}"
 
 #    -
 #      name: Compress portable program
