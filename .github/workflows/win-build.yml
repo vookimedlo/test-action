@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 env:
   QT_VERSION:     "6.3.1"
-  MINGW_VERSION:  "win64_mingw81"
+  MINGW_VERSION:  "win64_mingw"
   MINGW_PATH:     "mingw81_64"
   BUILD_TYPE:      Release
 
@@ -14,26 +14,13 @@ jobs:
     steps:
     -
       uses: actions/checkout@v3
-#    -
-#      name: Check mingw g++ version
-#      run: |
-#        Write-Output (Get-Command g++.exe).Path
-#        g++.exe --version
-    -
-      name: Install correct version of mingw
-      uses: crazy-max/ghaction-chocolatey@v1
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
       with:
-        args: install mingw --version=8.1.0  -y
-#    -
-#      name: Check mingw directory
-#      run: |
-#        ls C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin
-    -
-      name: Install Qt
-      uses: jurplel/install-qt-action@v2
-      with:
-        host: windows
-        target: "desktop"
+        aqtversion: '==2.1.*'
+        host: 'windows'
+        target: 'desktop'
+        modules: 'qtimageformats'        
         version: ${{ env.QT_VERSION }}
         arch: ${{ env.MINGW_VERSION }}
         dir: "${{github.workspace}}/qt"
@@ -43,8 +30,8 @@ jobs:
       run: |
         echo "${{github.workspace}}/qt/Qt/${{ env.QT_VERSION }}/${{ env.MINGW_PATH }}/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
         refreshenv
-        #Write-Output (Get-Command g++.exe).Path
-        #g++.exe --version
+        Write-Output (Get-Command g++.exe).Path
+        g++.exe --version
 #    -
 #      name: Check availability of libraries
 #      run: |
