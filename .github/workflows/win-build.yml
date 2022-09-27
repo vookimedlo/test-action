@@ -64,6 +64,8 @@ jobs:
       working-directory: ${{github.workspace}}\..
       run: |
         cmake --build build --config ${{env.BUILD_TYPE}} --target package
+        cd build
+        pwd
         echo "artifact_name=`ls *.zip`" >> $GITHUB_ENV
         echo "${{env.artifact_name}}"
         refreshenv
