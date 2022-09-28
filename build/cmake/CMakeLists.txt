@@ -25,6 +25,16 @@ MESSAGE("-- ${APPLICATION_NAME} - https://vookiimageviewer.cz")
 
 SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/modules ${CMAKE_MODULE_PATH})
 
+execute_process(
+        COMMAND git describe --dirty --tags --always --exact-match
+        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+        RESULT_VARIABLE res
+        OUTPUT_VARIABLE out
+        ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+MESSAGE("RES: ${res}")
+MESSAGE("OUT: ${out}")
+
 if (NOT VERSION)
     include(GetGitRevisionDescription)
     get_git_head_revision(HEAD_REFS HEAD_HASH "ALLOW_LOOKING_ABOVE_CMAKE_SOURCE_DIR")
