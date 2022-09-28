@@ -28,7 +28,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/modules ${CMAKE_MODULE_PATH})
 if (NOT VERSION)
     include(GetGitRevisionDescription)
     get_git_head_revision(HEAD_REFS HEAD_HASH "ALLOW_LOOKING_ABOVE_CMAKE_SOURCE_DIR")
-    git_describe_working_tree(HASH_TAG --tags --always --exact-match "${HEAD_HASH}")
+    git_describe_working_tree(HASH_TAG --tags --always --exact-match)
 
     SET(VERSION_REGEXP "[0-9][0-9][0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9]")
     STRING(REGEX REPLACE "^v(${VERSION_REGEXP})$" "\\1" VERSION "${HASH_TAG}")
