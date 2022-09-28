@@ -30,9 +30,11 @@ execute_process(
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
         RESULT_VARIABLE res
         OUTPUT_VARIABLE out
+        ERROR_VARIABLE err
         ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 MESSAGE("RES: ${res}")
+MESSAGE("ERR: ${err}")
 MESSAGE("OUT: ${out}")
 
 if (NOT VERSION)
