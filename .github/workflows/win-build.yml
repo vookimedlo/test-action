@@ -40,6 +40,8 @@ jobs:
         cmake --build build --config ${{env.BUILD_TYPE}} --target package
 
         cd build
+        $artifact_path = pwd
+        echo "artifact_path=$artifact_path" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         $name = Get-Childitem -Filter *.zip -Name
         echo "artifact_name_zip=$name" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         $name = Get-Childitem -Filter *.7z -Name
@@ -52,21 +54,21 @@ jobs:
       with:
         name: ${{env.artifact_name_zip}}
         path: |
-          ${{github.workspace}}\..\build\${{env.artifact_name_zip}}
+          ${{env.artifact_path}}\${{env.artifact_name_zip}}
         retention-days: ${{ inputs.artifact_retention_days }}
     - name: archive artifacts [7z]
       uses: actions/upload-artifact@v3
       with:
         name: ${{env.artifact_name_7z}}
         path: |
-          ${{github.workspace}}\..\build\${{env.artifact_name_7z}}
+          ${{env.artifact_path}}\${{env.artifact_name_7z}}
         retention-days: ${{ inputs.artifact_retention_days }}
     - name: archive artifacts [msi]
       uses: actions/upload-artifact@v3
       with:
         name: ${{env.artifact_name_msi}}
         path: |
-          ${{github.workspace}}\..\build\${{env.artifact_name_msi}}
+          ${{env.artifact_path}}\${{env.artifact_name_msi}}
         retention-days: ${{ inputs.artifact_retention_days }}
 
 #    -
