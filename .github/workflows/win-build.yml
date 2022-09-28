@@ -3,6 +3,7 @@ name: Windows Builds
 on: 
   workflow_dispatch:
   workflow_call:
+  push:
   
 env:
   QT_VERSION:              "6.4.0"
@@ -15,6 +16,8 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: install qt
       uses: jurplel/install-qt-action@v3
       with:
