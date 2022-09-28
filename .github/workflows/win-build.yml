@@ -52,21 +52,21 @@ jobs:
       with:
         name: ${{env.artifact_name_zip}}
         path: |
-          ${{github.workspace}}\..build\${{env.artifact_name_zip}}
+          ${{github.workspace}}\..\build\${{env.artifact_name_zip}}
         retention-days: ${{ inputs.artifact_retention_days }}
     - name: archive artifacts [7z]
       uses: actions/upload-artifact@v3
       with:
         name: ${{env.artifact_name_7z}}
         path: |
-          ${{github.workspace}}\..build\${{env.artifact_name_7z}}
+          ${{github.workspace}}\..\build\${{env.artifact_name_7z}}
         retention-days: ${{ inputs.artifact_retention_days }}
     - name: archive artifacts [msi]
       uses: actions/upload-artifact@v3
       with:
         name: ${{env.artifact_name_msi}}
         path: |
-          ${{github.workspace}}\..build\${{env.artifact_name_msi}}
+          ${{github.workspace}}\..\build\${{env.artifact_name_msi}}
         retention-days: ${{ inputs.artifact_retention_days }}
 
 #    -
