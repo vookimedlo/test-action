@@ -26,7 +26,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: pwd
-      run: pwd
+      run: git describe --dirty --tags --always --exact-match
     - name: docker [pull a build image]
       run: docker pull ${{ inputs.docker_image }}
     - name: docker [run a container]
