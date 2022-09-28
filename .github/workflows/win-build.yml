@@ -1,7 +1,9 @@
 name: Windows Builds
 
-on: workflow_dispatch
-
+on: 
+  workflow_dispatch:
+  workflow_call:
+  
 env:
   QT_VERSION:              "6.4.0"
   MINGW_VERSION:           "win64_msvc2019_64"
