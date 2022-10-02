@@ -42,6 +42,8 @@ jobs:
         docker exec linux_docker git config --global core.autocrlf false
         docker exec linux_docker git config --global core.eof crlf
         docker exec linux_docker git config -l
+        docker exec linux_docker bash -c "cd /root/sources/vooki-image-viewer && git describe --dirty --tags --always --exact-match"
+        docker exec linux_docker bash -c "source /etc/profile && cd /root/sources/vooki-image-viewer && git describe --dirty --tags --always --exact-match"
     - name: docker [build sources]
       run: |
         docker exec linux_docker ls -la /root/sources/vooki-image-viewer
