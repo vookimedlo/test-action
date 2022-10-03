@@ -58,3 +58,11 @@ jobs:
         retention-days: ${{ inputs.artifact_retention_days }}
     - name: docker [stop]
       run: docker stop linux_docker || true
+    - name: release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        draft: true
+        files: |
+          *.deb
+          *.rpm
