@@ -58,11 +58,14 @@ jobs:
         retention-days: ${{ inputs.artifact_retention_days }}
     - name: docker [stop]
       run: docker stop linux_docker || true
+    - name: release [artifacts preparation]
+      if: startsWith(github.ref, 'refs/tags/')
+      run: |
+        zip ${{ inputs.artifact_name }}_${{ env.artifact_name }}.zip *.deb *.rpm
     - name: release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         draft: true
         files: |
-          *.deb
-          *.rpm
+          ${{ inputs.artifact_name }}_${{ env.artifact_name }}.zip
